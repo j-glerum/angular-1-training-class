@@ -1,7 +1,7 @@
 # Angular Training Course - Zerrtech
 -----
 
-## Step 8: 
+## Step 9: 
 
 ### Changed Files:
 * `src/common/squad/squadService.js`
@@ -21,4 +21,4 @@
 2. `src/routes/list/list.js`
    * We want to filter out the list of heroes and exclude any in squad
    * We can use `$watch` to see when squadHeroes change, and then create a modified list of heroes on scope called `noSquadHeroes`
-   * Give the `heroList` this new `noSquadHeroes list
+   * Give the `heroList` this new `noSquadHeroes` list
