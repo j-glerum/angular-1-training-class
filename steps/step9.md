@@ -9,14 +9,7 @@
 
 ### Things to Do:
 1. `src/common/squad/squadService.js`
-   * Review functions, we have made the heroes array immutable, they have been built already:
-     * getAll()
-     * clearAll()
-     * addHero(hero)
-     * removeHero(hero)
-     * get/setMaxHeroes(numHeroes)
-     * isFull()
-     * contains(hero)
+   * We have added a `contains(hero)` method:
 
 2. `src/routes/list/list.js`
    * We want to filter out the list of heroes and exclude any in squad
