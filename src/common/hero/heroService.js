@@ -15,7 +15,6 @@ function heroService($http, $q, HEROES_API) {
   };
 
   function getAll() {
-    console.log('hero::heroService::getAll');
     if (heroes.length === 0) {
       // get heroes from data/heroes.json
       // and set heroes to the value returned in the resonse
