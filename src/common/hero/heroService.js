@@ -10,7 +10,8 @@ function heroService($http, $q, HEROES_API) {
 
   var service = {
     getAll: getAll,
-    get: get
+    get: get,
+    update: update
   };
 
   function getAll() {
@@ -35,6 +36,18 @@ function heroService($http, $q, HEROES_API) {
       });
       return h[0];
     }); 
+  }
+
+  function update(hero) {
+    // save to API
+    return $http.put(HEROES_API + '/heroes/' + hero.id.toString(), hero).then(function(res) {
+      // success
+      return hero;
+    }, function(error) {
+      // error
+      console.error('error in PUT:', error);
+      return $q.reject(error);
+    });
   }
 
   return service;
