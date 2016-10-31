@@ -22,11 +22,9 @@ function ListController($scope, heroService, squadService, $location) {
   $scope.squadHeroes = squadService.heroes;
   $scope.noSquadHeroes = [];
 
-  $scope.isLoading = true;
   heroService.getAll().then(function(heroes) {
     $scope.heroes = heroes;
     $scope.noSquadHeroes = heroes;
-    $scope.isLoading = false;
   });
 
   $scope.$watchCollection('squadHeroes', function(newVal, oldVal) {
