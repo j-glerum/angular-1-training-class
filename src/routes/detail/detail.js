@@ -19,11 +19,20 @@ function DetailController($scope, $routeParams, heroService, $location) {
   
   $scope.heroId = parseInt($routeParams.id);
 
-  // get hero from service
-  $scope.hero = {};
+  function heroWatch(newVal, oldVal) {
+    if (newVal === oldVal) { // initial watch fires with two equal objects, can be ignored
+      return;
+    }
+    heroService.update(newVal);
+  }
 
+  // get hero from service
   heroService.get($scope.heroId).then(function(hero) {
     $scope.hero = hero;
+
+    // watch for changes on hero, if any, save to API
+    // third parameter of true says to watch all properties
+    $scope.$watch('hero', heroWatch, true);
   });
 
   $scope.gotoList = function() {
