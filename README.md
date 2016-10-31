@@ -13,3 +13,4 @@
 * Step 7: Add in-place filtering to List - [steps/step7.md](steps/step7.md)
 * Step 8: Add Squad feature - [steps/step8.md](steps/step8.md)
 * Step 9: Add state of Squad back into Hero displays - [steps/step9.md](steps/step9.md)
+* Step A: Update server when Hero changes - [steps/stepA.md](steps/stepA.md)
