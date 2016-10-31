@@ -1,9 +1,10 @@
 angular
   .module('heroService', [
   ])
+  .value('HEROES_API', 'https://angular-1-training-class-api.herokuapp.com')
   .factory('heroService', heroService);
 
-function heroService($http, $q) {
+function heroService($http, $q, HEROES_API) {
   
   var heroes = [];
 
@@ -13,11 +14,10 @@ function heroService($http, $q) {
   };
 
   function getAll() {
-    console.log('hero::heroService::getAll');
     if (heroes.length === 0) {
       // get heroes from data/heroes.json
       // and set heroes to the value returned in the resonse
-      return $http.get('data/heroes.json').then(function(res) {
+      return $http.get(HEROES_API + '/heroes').then(function(res) {
         heroes = res.data;
         return heroes;
       });
@@ -28,7 +28,7 @@ function heroService($http, $q) {
   }
 
   function get(id) {
-    return service.getAll().then(function(heroes) {
+    return this.getAll().then(function(heroes) {
       // move filtering here
       var h = heroes.filter(function(hero) {
         return hero.id === id;
