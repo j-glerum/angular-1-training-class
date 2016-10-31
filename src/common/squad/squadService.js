@@ -3,13 +3,14 @@ angular.module('squadService', [])
 
 function squadService() {
 
+    // ensure none of the methods change the reference of
+    // heroes, they modify the array in place
     var numMaxHeroes = 4;
 
     var service = {
-        heroes: [], // Immutable array
+        heroes: [],
         getAll: getAll,
         clearAll: clearAll,
-        contains: contains,
         addHero: addHero,
         removeHero: removeHero,
         getMaxHeroes: getMaxHeroes,
@@ -28,22 +29,24 @@ function squadService() {
      * Clear the list of heroes
      */
     function clearAll() {
-        service.heroes = [];
+        while (service.heroes.length > 0) {
+            service.heroes.splice(0, 1);
+        }
     }
 
     /**
-     * Does the squad contain this hero
+     * Return the index of a hero within the squad
      * 
      * @param {any} hero
-     * @returns {boolean} True if hero in squad, otherwise false
+     * @returns {integer} Index of hero within squad, 0+, -1 if not found
      */
-    function contains(hero) {
+    function _getHeroIndex(hero) {
         for (var i = 0; i < service.heroes.length; i++) {
             if (service.heroes[i] === hero) {
-                return true;
+                return i;
             }
         }
-        return false;
+        return -1;
     }
 
     /**
@@ -53,8 +56,12 @@ function squadService() {
      */
     function addHero(hero) {
         // make sure hero is not already in squad
-        if (!service.contains(hero) && !service.isFull()) {
-            service.heroes = service.heroes.concat(hero);
+        var heroIndex = _getHeroIndex(hero);
+        var heroNotInSquad =  (heroIndex === -1 ? true : false);
+        // also check to make sure we have not hit
+        // max heroes in squad
+        if (heroNotInSquad && !service.isFull()) {
+            service.heroes.push(hero);
         }
     }
 
@@ -65,9 +72,10 @@ function squadService() {
      */
     function removeHero(hero) {
         // find hero and remove from array
-        service.heroes = service.heroes.filter(function(heroItem) {
-            return !(heroItem === hero);
-        });
+        var heroIndex = _getHeroIndex(hero);
+        if (heroIndex !== -1) {
+            service.heroes.splice(heroIndex, 1);
+        }
     }
 
     /**
