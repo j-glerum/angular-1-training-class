@@ -9,10 +9,23 @@
   <script src="src/app.js"></script>
 </head>
 <body ng-app="app">
-  <div ng-controller="AppController">
+  <div class="container" ng-controller="AppController">
     <h1>{{ title }}</h1>
     <div>
-      <!-- LIST GOES HERE: -->
+      <table>
+        <ul class="list-group">
+          <th>Name</th>
+          <th>Power</th>
+          <th>Light</th>
+          <th>Affiliations</th>
+        </tr>
+        <tr ng-repeat="id in heroes">
+          <td>{{id.name}}</td>
+          <td>{{id.power}}</td>
+          <td>{{id.light}}</td>
+          <td>{{id.affiliations}}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </body>
